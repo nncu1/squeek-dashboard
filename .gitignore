@@ -4,3 +4,7 @@ test/.data/
 .env
 DEPLOY.md
 .env.example
+Dockerfile
+docker-compose.yml
+.dockerignore
+deploy/
