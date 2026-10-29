@@ -1,0 +1,70 @@
+{
+  "_help": "Projects shown on the Ecosystem tab. Add one object per project. logo: a file in public/eco/ (square PNG, 128 px is plenty) or leave it out for a lettered badge. category: one of the names in categories. website and x are optional.",
+  "categories": ["Analytics", "DeFi", "Derivatives", "DEX", "Games", "Infrastructure", "Launchpad", "NFT", "Prediction markets", "RPC providers", "Tools"],
+  "projects": [
+    {
+      "name": "SQKSTR",
+      "category": "DeFi",
+      "logo": "eco/sqkstr.png",
+      "description": "Squeek Strategy: a community vault that pools Squeeks and SQK and runs them as one position on Squeekchain.",
+      "x": "https://x.com/SQKSTR"
+    },
+    {
+      "name": "Exsqueektion",
+      "logo":"eco/squeekwin.png",
+      "category": "Games",
+      "description": "A solo extraction game: grab loot from the garden, then escape through the portal before it closes. Play at squeek.win",
+      "website": "https://squeek.win/"
+    },
+    {
+      "name": "Wheelpad",
+      "category": "Launchpad",
+      "logo": "eco/wheelpad.png",
+      "description": "Wheelpad.fun: a launchpad for new tokens on Squeekchain.",
+      "x": "https://x.com/Wheelpadfun"
+    },
+    {
+      "name": "Squeekbet",
+      "category": "Prediction markets",
+      "description": "Bet on the hamster-powered blockchain",
+      "website": "https://squeekbet.xyz/"
+    },
+    {
+      "name": "Intelligent Dance Market",
+      "category": "Tools",
+      "description": "Intelligent Dance Market ($IDM): a Uniswap v4 hook whose on-chain state is a 16-step drum machine. Every trade is a note",
+      "website": "https://theidm.fun/?net=squeekchain"
+    },
+    {
+      "name": "The Wheelpaper",
+      "category": "Tools",
+      "logo":"eco/wheelpaper.png",
+      "description": "The Squeekchain whitepaper, made playable. Unofficial",
+      "website": "https://wheelpaper.vercel.app/",
+      "x": "https://x.com/0xmeto_"
+    },
+    {
+      "name": "Hamster Hour",
+      "category": "Games",
+      "logo":"eco/hamsterhousegame.jpg",
+      "description": "A real hamster. One hour. Bet IMD on the wheel, watch the live cam, and take a guess at the jackpot. Hamster Hour on Ethereum",
+      "website": "https://hamsterhour.fun/",
+      "x": "https://x.com/hamsterhourgame"
+    },
+    {
+      "name": "NutshellMarkets",
+      "category": "DeFi",
+      "logo":"eco/nutshellmarkets.jpg",
+      "description": "Building a treasury designed to grow @squeekchain.",
+      "x": "https://x.com/nutshellmarkets"
+    },
+        {
+      "name": "quadConnect",
+      "category": "DeFi",
+      "logo":"eco/quadconnect.jpg",
+      "description": "Squeekchain mining + hourly long/short + auto compounding in one vault, per the dev. testnet announced, nothing independently confirmed yet",
+      "website": "https://quad.cx/",
+      "x": "https://x.com/quadconnects"
+    }
+  ]
+}

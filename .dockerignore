@@ -1,0 +1,8 @@
+node_modules
+data
+test
+deploy
+.env
+*.zip
+*.log
+hardhat.config.cjs

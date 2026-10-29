@@ -1,0 +1,12 @@
+# HTTPS in front of squeek-dash. DOMAIN comes from .env (docker compose) or the environment.
+{$DOMAIN} {
+	encode zstd gzip
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		X-Frame-Options "DENY"
+		-Server
+	}
+	# "dash:8787" inside docker compose; for a plain install use 127.0.0.1:8787 (see DEPLOY.md)
+	reverse_proxy {$UPSTREAM:dash:8787}
+}

@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Squeek Dashboard</title>
+  <meta name="description" content="Squeek Dashboard: every Squeek on Squeekchain, owners, merges, level and power leaderboards.">
+  <meta name="theme-color" content="#f6f7f9">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/icon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta property="og:title" content="Squeek Dashboard">
+  <meta property="og:description" content="Every Squeek on Squeekchain: owners, merges, level and power leaderboards.">
+  <meta property="og:image" content="/icon-512.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="description" content="Every Squeek on Squeekchain: owners, merges, level and power leaderboards.">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="bar">
+    <div class="brand"><img src="/icon-32.png" alt="" width="20" height="20">Squeek Dashboard<span>a Squeekchain explorer</span></div>
+    <div id="syncline" aria-live="polite"><span class="dot"></span>connecting</div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button role="tab" data-tab="overview" aria-selected="true"><kbd>1</kbd>overview</button>
+    <button role="tab" data-tab="squeeks"><kbd>2</kbd>squeeks</button>
+    <button role="tab" data-tab="leaders"><kbd>3</kbd>leaderboards</button>
+    <button role="tab" data-tab="active"><kbd>4</kbd>active</button>
+    <button role="tab" data-tab="wallet"><kbd>5</kbd>wallet</button>
+    <button role="tab" data-tab="ecosystem"><kbd>6</kbd>ecosystem</button>
+  </nav>
+
+  <main>
+    <div id="notice" class="notice" hidden></div>
+
+    <section id="tab-overview" role="tabpanel">
+      <div class="hero">
+        <div>
+          <div id="height" class="matrix" role="img" aria-label="Squeek block height"></div>
+          <p class="hero-cap" id="height-cap">Squeek blocks mined by Squeektoshi</p>
+          <div class="hamster">
+            <svg class="wheel" id="wheel" viewBox="0 0 34 34" aria-hidden="true"><g><circle cx="17" cy="17" r="15"/><line x1="17" y1="2" x2="17" y2="32"/><line x1="2" y1="17" x2="32" y2="17"/><line x1="6.4" y1="6.4" x2="27.6" y2="27.6"/><line x1="27.6" y1="6.4" x2="6.4" y2="27.6"/></g></svg>
+            <div><div id="hamster-line">Reading the wheel</div><div id="stream-line" class="dim"></div></div>
+          </div>
+        </div>
+        <div class="records-col">
+          <h3>Squeektoshi's records, last 7 days</h3>
+          <dl class="records" id="records"><div><dt>records</dt><dd class="dim">Loading</dd></div></dl>
+          <pre class="leaders" id="stats" aria-label="Chain details"></pre>
+        </div>
+      </div>
+
+      <div class="grid2 pulse">
+        <figure class="chart" id="fig-hourly">
+          <figcaption><b>Merges per hour, last 48 hours</b><button data-table="fig-hourly">show table</button></figcaption>
+          <div class="plot"></div>
+        </figure>
+        <div class="readout" aria-label="Network statistics">
+          <dl class="figures" id="figures"></dl>
+          <div class="supply" id="supply"></div>
+        </div>
+      </div>
+
+      <section class="levels" aria-labelledby="levels-h">
+        <div class="levels-head">
+          <h2 id="levels-h">Squeeks by level</h2>
+          <p class="dim" id="levels-note"></p>
+        </div>
+        <div class="tablewrap"><table id="level-table" class="ladder fit"></table></div>
+      </section>
+    </section>
+
+    <section id="tab-squeeks" role="tabpanel" hidden>
+      <form class="controls" id="nft-filters">
+        <input type="search" name="q" placeholder="Token ID or address" aria-label="Search by token ID or owner" size="30">
+        <label>level <select name="level"><option value="">any</option></select></label>
+        <label>state
+          <select name="state">
+            <option value="">any</option><option value="ready">ready to merge</option><option value="cooldown">cooldown</option>
+            <option value="max">max level</option>
+          </select>
+        </label>
+        <label>where
+          <select name="custody">
+            <option value="">anywhere</option><option value="vault">staked in the vault</option><option value="wallet">in a wallet</option>
+          </select>
+        </label>
+        <label>sort
+          <select name="sort">
+            <option value="level">level</option><option value="power">power</option><option value="id">token ID</option>
+            <option value="newest">mint order</option>
+          </select>
+        </label>
+        <label>order <select name="dir"><option value="desc">high to low</option><option value="asc">low to high</option></select></label>
+        <span class="count"><span class="legend" title="■ = staked in the vault"><i class="vault-mark"></i>in the vault</span><span id="nft-count"></span></span>
+      </form>
+      <div class="cards" id="cards"></div>
+      <nav class="pager" id="pager" aria-label="Squeek pages"></nav>
+    </section>
+
+    <section id="tab-leaders" role="tabpanel" hidden>
+      <div class="controls">
+        <h2 style="margin:0">Wallets</h2>
+        <label>rank by
+          <select id="wallet-sort">
+            <option value="power">staked power</option><option value="total">total power</option><option value="count">Squeeks held</option>
+            <option value="vault">Squeeks in the vault</option><option value="level">highest level</option><option value="merges">merges done</option>
+            <option value="pairs">pairs ready to merge</option>
+          </select>
+        </label>
+        <input type="search" id="wallet-q" placeholder="Filter by address" aria-label="Filter wallets by address" size="26">
+        <span class="count" id="wallet-count"></span>
+      </div>
+      <div class="tablewrap"><table id="wallet-table" class="fit"></table></div>
+      <nav class="pager" id="wallet-pages" aria-label="Wallet leaderboard pages"></nav>
+
+    </section>
+
+    <section id="tab-active" role="tabpanel" hidden>
+      <div class="kv" id="merge-kv"></div>
+      <div class="grid2">
+        <div>
+          <h3>Latest merges</h3>
+          <div class="tablewrap rows-box" id="merge-scroll" tabindex="0" aria-label="Latest merges, scroll for older ones"><table id="merge-table"></table></div>
+          <p class="box-note dim" id="merge-note"></p>
+        </div>
+        <div>
+          <h3>Staking vault</h3>
+          <div class="tablewrap rows-box" id="vault-scroll" tabindex="0" aria-label="Latest vault deposits and withdrawals"><table id="vault-table"></table></div>
+          <p class="box-note dim" id="vault-note"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-wallet" role="tabpanel" hidden>
+      <form class="controls" id="wallet-form">
+        <input type="text" name="addr" placeholder="0x… wallet address" aria-label="Wallet address" size="46" autocomplete="off" spellcheck="false">
+        <button class="btn" type="submit">Look up</button>
+      </form>
+      <div id="wallet-view"><p class="dim">Paste an address to see its Squeeks, power share and activity.</p></div>
+    </section>
+
+    <section id="tab-ecosystem" role="tabpanel" hidden>
+      <div class="eco-bar">
+        <label class="eco-search"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6"/><line x1="10.4" y1="10.4" x2="14" y2="14"/></svg><input type="search" id="eco-q" placeholder="Search projects" aria-label="Search projects"></label>
+        <select id="eco-cat" aria-label="Category"><option value="">All categories</option></select>
+        <span class="count" id="eco-count"></span>
+        <div class="seg" role="group" aria-label="Layout">
+          <button type="button" data-view="grid" aria-pressed="true"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Grid</button>
+          <button type="button" data-view="table" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="2.5" width="12" height="11" rx="1.5"/><line x1="2" y1="6.5" x2="14" y2="6.5"/><line x1="2" y1="10" x2="14" y2="10"/></svg>Table</button>
+        </div>
+      </div>
+      <div id="eco-view"></div>
+    </section>
+  </main>
+
+  <div class="scrim" id="scrim"></div>
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" hidden></aside>
+  <div id="tooltip" role="status"></div>
+  <script src="/app.js" type="module"></script>
+</body>
+</html>

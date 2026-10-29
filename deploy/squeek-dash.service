@@ -1,0 +1,25 @@
+# systemd unit for a plain install without Docker (see DEPLOY.md, option B).
+# Copy to /etc/systemd/system/squeek-dash.service, then: sudo systemctl enable --now squeek-dash
+[Unit]
+Description=squeek-dash, Squeekchain explorer
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=squeek
+WorkingDirectory=/opt/squeek-dash
+EnvironmentFile=/opt/squeek-dash/.env
+Environment=NODE_ENV=production HOST=127.0.0.1 TRUST_PROXY=1
+ExecStart=/usr/bin/node index.mjs
+Restart=always
+RestartSec=5
+# hardening: the service can only write its own data folder
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/opt/squeek-dash/data
+
+[Install]
+WantedBy=multi-user.target

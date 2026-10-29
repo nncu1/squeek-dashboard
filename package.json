@@ -1,0 +1,22 @@
+{
+  "name": "squeek-dash",
+  "version": "0.1.0",
+  "description": "Squeekchain explorer: every Squeek, owners, merges, level and power leaderboards",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.mjs",
+    "test": "node test/run.mjs"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "2.6.2",
+    "viem": "2.57.7"
+  },
+  "engines": {
+    "node": ">=20.6"
+  },
+  "devDependencies": {
+    "hardhat": "^2.29.1",
+    "solc": "^0.8.28"
+  }
+}
